@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,8 +10,8 @@ namespace NinjaGame
 {
     public class Player : Entity
     {
-
-        public Direction facing = Direction.SOUTH;
+        //List<Entity> collisionGroup;
+        public Direction facing;
 
 
         public Player(string name, int hp, int atk, Vector2 position, Texture2D texture)
@@ -29,6 +31,17 @@ namespace NinjaGame
             return false;
         }
 
+        /**
+         * Returns the updated position as a Rectangle
+         */
+        public override Rectangle Rect
+        {
+            get
+            {
+                return new Rectangle((int)position.X, (int)position.Y, 100, 100);
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (IsDead())
@@ -43,18 +56,22 @@ namespace NinjaGame
             {
                 dX += 4;
                 facing = Direction.EAST;
+                System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
+
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 dX -= 4;
                 facing = Direction.WEST;
+                System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
+
             }
 
             position.X += dX;
 
-            //foreach (var character in collisionGroup)
+            //foreach (var entity in collisionGroup)
             //{
-            //    if (character.Rect.Intersects(Rect))
+            //    if (entity.Rect.Intersects(Rect))
             //    {
             //        position.X -= dX;
             //    }
@@ -64,18 +81,22 @@ namespace NinjaGame
             {
                 dY -= 4;
                 facing = Direction.NORTH;
+                System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
+
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down))
             {
                 dY += 4;
                 facing = Direction.SOUTH;
+                System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
+
             }
 
             position.Y += dY;
 
-            //foreach (var character in collisionGroup)
+            //foreach (var entity in collisionGroup)
             //{
-            //    if (character.Rect.Intersects(Rect))
+            //    if (entity.Rect.Intersects(Rect))
             //    {
             //        position.Y -= dY;
             //    }
