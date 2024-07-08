@@ -32,9 +32,9 @@ namespace NinjaGame
             }
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
             {
-                counter++;
+                counter+=2;
             }
-            if (activeFrame == 0)
+            if (activeFrame == 0 || activeFrame == 2)
             {
                 counter += 4;
             }

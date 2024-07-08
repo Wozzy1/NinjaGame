@@ -25,14 +25,14 @@ namespace NinjaGame
 
             counter = 0;
             activeFrame = 0;
-            interval = 40;
+            interval = 25;
 
         }
 
 
         public void Update()
         {
-            counter++;
+            counter += 1;
             if (counter > interval)
             {
                 counter = 0;

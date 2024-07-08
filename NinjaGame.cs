@@ -37,6 +37,7 @@ namespace NinjaGame
             // =======
             // Player Animation Block
             _playerTexture = Content.Load<Texture2D>("SpriteSheet");
+            _player = new Player("Mu", 1, 1, new Vector2(100, 100), _playerTexture);
             pam = new(_player, 4, new Vector2(16, 16));
 
             // End of Block

@@ -1,0 +1,7 @@
+All sprites, resources, fonts, and sounds credited to:
+https://pixel-boy.itch.io/ninja-adventure-asset-pack
+
+Beginning skeleton code and tutorial followed
+Coding with Sphere monogame youtube tutorial
+discord, youtube links
+
