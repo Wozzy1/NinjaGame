@@ -25,7 +25,7 @@ namespace NinjaGame
 
             counter = 0;
             activeFrame = 0;
-            interval = 30;
+            interval = 40;
 
         }
 
@@ -36,20 +36,15 @@ namespace NinjaGame
             if (counter > interval)
             {
                 counter = 0;
-                NextFrame();
+                activeFrame++;
+                if (activeFrame >= numFrames)
+                {
+                    activeFrame = 0;
+                }
+
             }
         }
-
-        protected void NextFrame()
-        {
-            activeFrame++;
-            if (activeFrame >= numFrames)
-            {
-                activeFrame = 0;
-            }
-        }
-
-        public Rectangle GetFrame()
+        public virtual Rectangle GetFrame()
         {
             return new Rectangle(0, activeFrame * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }

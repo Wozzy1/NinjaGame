@@ -5,24 +5,20 @@ using NinjaGame.Content;
 
 namespace NinjaGame
 {
-    public class Game1 : Game
+    public class NinjaGame : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Entity _player;
+        private Player _player;
 
-        // look to condense these variables into one struct
+        // =======
+        // Player Animation Block
         private Texture2D _playerTexture;
-        private int counter;
-        private int activeFrame;
-        private int numFrames;
-        private int PLAYER_LENGTH = 16;
-        private int PLAYER_WIDTH = 16;
-
         private PlayerAnimationManager pam;
+        // end of block
         // ========
 
-        public Game1()
+        public NinjaGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -39,15 +35,11 @@ namespace NinjaGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // =======
-            // player animation block
+            // Player Animation Block
             _playerTexture = Content.Load<Texture2D>("SpriteSheet");
-            counter = 0;
-            activeFrame = 0;
-            numFrames = 4;
-            _player = new Player("Mu", 1, 1, new Vector2(100, 100), _playerTexture);
             pam = new(_player, 4, new Vector2(16, 16));
 
-            // end of block
+            // End of Block
             // =======
         }
 
@@ -57,23 +49,10 @@ namespace NinjaGame
                 Exit();
 
             // =======
-            // player animation block
-            /*
-            counter++;
-            if (counter > 29)
-            {
-                counter = 0;
-                activeFrame++;
-
-                if (activeFrame == numFrames)
-                {
-                    activeFrame = 0;
-                }
-            }
-            */
+            // Player Animation Block
 
             pam.Update();
-            // end of block
+            // End of Block
             // =======
 
             _player.Update(gameTime);
@@ -87,13 +66,12 @@ namespace NinjaGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // =======
-            // SpriteBatch Drawing block
+            // SpriteBatch Drawing Block
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
             _spriteBatch.Draw(
                 _player.texture,
                 _player.Rect,
-                //new Rectangle(0, activeFrame * PLAYER_LENGTH, 16, 16),
                 pam.GetFrame(),
                 Color.White
                 );

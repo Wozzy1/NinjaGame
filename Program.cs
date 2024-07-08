@@ -1,3 +1,3 @@
 ﻿
-using var game = new NinjaGame.Game1();
+using var game = new NinjaGame.NinjaGame();
 game.Run();

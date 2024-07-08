@@ -13,11 +13,15 @@ namespace NinjaGame
         //List<Entity> collisionGroup;
         public Direction facing;
 
+        private int idleTime;
+        public bool isIdle;
 
         public Player(string name, int hp, int atk, Vector2 position, Texture2D texture)
             : base(name, hp, atk, position, texture)
         {
-
+            facing = Direction.SOUTH;
+            idleTime = 0;
+            isIdle = false;
         }
 
         /**
@@ -56,17 +60,22 @@ namespace NinjaGame
             {
                 dX += 4;
                 facing = Direction.EAST;
-                System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
+                //System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 dX -= 4;
                 facing = Direction.WEST;
-                System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
+                //System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
 
             }
 
+            // Sprinting with shift key
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                dX *= (float)1.5;
+            }
             position.X += dX;
 
             //foreach (var entity in collisionGroup)
@@ -81,17 +90,21 @@ namespace NinjaGame
             {
                 dY -= 4;
                 facing = Direction.NORTH;
-                System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
+                //System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down))
             {
                 dY += 4;
                 facing = Direction.SOUTH;
-                System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
+                //System.Diagnostics.Debug.WriteLine("I am facing " + Enum.GetName(direction));
 
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                dY *= (float)1.5;
+            }
             position.Y += dY;
 
             //foreach (var entity in collisionGroup)
@@ -101,6 +114,16 @@ namespace NinjaGame
             //        position.Y -= dY;
             //    }
             //}
+
+            if (dX == 0 && dY == 0)
+                idleTime++;
+            else
+                idleTime = 0;
+
+            if (idleTime > 5)
+                isIdle = true;
+            else
+                isIdle = false;
 
         }
     }
