@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using NinjaGame.Content;
 using SharpDX.Direct2D1.Effects;
 
 namespace NinjaGame
@@ -18,7 +17,7 @@ namespace NinjaGame
             : base(numFrames, size) 
         { 
             this._player = _player;
-            System.Diagnostics.Debug.WriteLine("During construction of PAM, facing: " + _player.direction);
+            //System.Diagnostics.Debug.WriteLine("During construction of PAM, facing: " + _player.direction);
         }
 
 

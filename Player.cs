@@ -4,20 +4,19 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using NinjaGame.Content;
 
 namespace NinjaGame
 {
     public class Player : Entity
     {
         //List<Entity> collisionGroup;
-        public Direction facing;
+
 
         private int idleTime;
         public bool isIdle;
 
-        public Player(string name, int hp, int atk, Vector2 position, Texture2D texture)
-            : base(name, hp, atk, position, texture)
+        public Player(string name, EntityStats stats, Vector2 position, Texture2D texture)
+            : base(name, stats, position, texture)
         {
             facing = Direction.SOUTH;
             idleTime = 0;

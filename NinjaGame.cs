@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using NinjaGame.Content;
 
 namespace NinjaGame
 {
@@ -16,8 +15,17 @@ namespace NinjaGame
         private Texture2D _playerTexture;
         private PlayerAnimationManager pam;
         // end of block
-        // ========
+        // =======
 
+
+        // =======
+        // Player Animation Block
+        private Texture2D _snakeTexture;
+        private SnakeAnimationManager sam;
+        // end of block
+        // =======
+
+        private Snake _snake;
         public NinjaGame()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -35,13 +43,23 @@ namespace NinjaGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // =======
-            // Player Animation Block
+            // Player Creation Block
             _playerTexture = Content.Load<Texture2D>("SpriteSheet");
-            _player = new Player("Mu", 1, 1, new Vector2(100, 100), _playerTexture);
+            _player = new Player("Mu", new EntityStats(1, 1, 1), new Vector2(100, 100), _playerTexture);
             pam = new(_player, 4, new Vector2(16, 16));
 
             // End of Block
             // =======
+
+            // =======
+            // Snake Creation Block
+            _snakeTexture = Content.Load<Texture2D>("Snake");
+            _snake = new Snake("Puu", new EntityStats(1, 1, 1), new Vector2(200, 50), _snakeTexture);
+            sam = new(_snake, 4, new Vector2(16, 16));
+
+            // End of Block
+            // =======
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -50,13 +68,18 @@ namespace NinjaGame
                 Exit();
 
             // =======
-            // Player Animation Block
-
+            // Player Block
             pam.Update();
+            _player.Update(gameTime);
             // End of Block
             // =======
 
-            _player.Update(gameTime);
+            // =======
+            // Snack Block
+            sam.Update();
+            _snake.Update(gameTime);
+            // End of Block
+            // =======
 
 
             base.Update(gameTime);
@@ -75,6 +98,13 @@ namespace NinjaGame
                 _player.Rect,
                 pam.GetFrame(),
                 Color.White
+                );
+
+            _spriteBatch.Draw(
+                _snake.texture,
+                _snake.Rect,
+                sam.GetFrame(),
+                Color.White 
                 );
 
             _spriteBatch.End();

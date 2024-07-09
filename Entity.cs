@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace NinjaGame.Content
+namespace NinjaGame
 {
     public abstract class Entity
     {
-        public enum Direction {
+        public enum Direction
+        {
             NORTH,
             EAST,
             SOUTH,
@@ -18,16 +19,14 @@ namespace NinjaGame.Content
         }
 
         public string name;
-        public int hp;
-        public int atk;
+        public EntityStats stats;
         public Vector2 position;
         public Texture2D texture;
-
-        public Direction direction = Direction.SOUTH;
+        public Direction facing;
 
         /**
          * This rectangle is the size of the texture.
-         */ 
+         */
         public virtual Rectangle Rect
         {
             get
@@ -36,11 +35,10 @@ namespace NinjaGame.Content
             }
         }
 
-        public Entity(string name, int hp, int atk, Vector2 position, Texture2D texture)
+        public Entity(string name, EntityStats stats, Vector2 position, Texture2D texture)
         {
             this.name = name;
-            this.hp = hp;
-            this.atk = atk;
+            this.stats = stats;
             this.position = position;
             this.texture = texture;
         }
@@ -60,7 +58,7 @@ namespace NinjaGame.Content
 
         public bool IsDead()
         {
-            return hp <= 0;
+            return stats.hp <= 0;
         }
 
     }
