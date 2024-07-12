@@ -54,7 +54,7 @@ namespace NinjaGame
             // =======
             // Snake Creation Block
             _snakeTexture = Content.Load<Texture2D>("Snake");
-            _snake = new Snake("Puu", new EntityStats(1, 1, 1), new Vector2(200, 50), _snakeTexture);
+            _snake = new Snake("Puu", new EntityStats(1, 1, 1), new Vector2(200, 50), _snakeTexture, _player);
             sam = new(_snake, 4, new Vector2(16, 16));
 
             // End of Block

@@ -10,10 +10,14 @@ namespace NinjaGame
 {
     internal class Snake : Entity
     {
-        public Snake(string name, EntityStats stats, Vector2 position, Texture2D texture)
+        private bool playerSeen;
+        private Player _player;
+        public Snake(string name, EntityStats stats, Vector2 position, Texture2D texture, Player _player)
             : base(name, stats, position, texture)
         {
             facing = Direction.WEST;
+            playerSeen = false;
+            this._player = _player;
         }
         
         public override bool Attack(Entity e)
@@ -23,7 +27,10 @@ namespace NinjaGame
         }
         public override void Update(GameTime gameTime)
         {
-
+            if (InLineOfSight(_player.position))
+            {
+                playerSeen = true;
+            }
         }
 
     }
