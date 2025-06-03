@@ -6,7 +6,7 @@ namespace NinjaGame
 {
     public class NinjaGame : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private GraphicsDeviceManager graphics;
         private SpriteBatch _spriteBatch;
         private Player _player;
 
@@ -28,7 +28,7 @@ namespace NinjaGame
         private Snake _snake;
         public NinjaGame()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
@@ -36,6 +36,12 @@ namespace NinjaGame
         protected override void Initialize()
         {
             base.Initialize();
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.HardwareModeSwitch = false;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
+
         }
 
         protected override void LoadContent()
@@ -54,7 +60,7 @@ namespace NinjaGame
             // =======
             // Snake Creation Block
             _snakeTexture = Content.Load<Texture2D>("Snake");
-            _snake = new Snake("Puu", new EntityStats(1, 1, 1), new Vector2(200, 50), _snakeTexture, _player);
+            _snake = new Snake("Puu", new EntityStats(1, 1, 1), new Vector2(600, 50), _snakeTexture, _player);
             sam = new(_snake, 4, new Vector2(16, 16));
 
             // End of Block

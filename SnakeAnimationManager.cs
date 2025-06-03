@@ -22,12 +22,16 @@ namespace NinjaGame
         public new void Update()
         {
             // make snake move towards player
+
+                /*
             dirCounter++;
             if (dirCounter > 60)
             {
+
+
+
                 Random rand = new Random();
                 int dir = rand.Next(4);
-
                 switch (dir)
                 {
                     case 0:
@@ -43,8 +47,9 @@ namespace NinjaGame
                         _snake.facing = Entity.Direction.WEST;
                         break;
                 }
+                */
                 dirCounter = 0;
-            }
+            //}
 
             base.Update();
         }
